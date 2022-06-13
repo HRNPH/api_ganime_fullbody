@@ -221,10 +221,11 @@ model = StyleGenerator(seed_size, 512, 512)
 model.load_state_dict(torch.load(model_path, map_location=device))
 model.eval()
 
+# create route with flask that takes in a url and returns a response as a text
 @app.route('/', methods=['GET'])
-def index():
-  # return list of routes ['gan_me']
-  return jsonify(routes=['gan_me'])
+def home():
+    return '''<h1>Welcome to the AniGansFullbody server</h1>
+<p>Try sending a GET request to <a href="/generate">/gan_me</a>.</p>'''
 
 @app.route('/gan_me', methods=['GET'])
 def gan_me():
