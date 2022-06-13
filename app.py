@@ -249,4 +249,5 @@ def gan_me():
 
 # create port and run app
 if __name__ == '__main__':
+    os.listdir('./model')
     app.run()
