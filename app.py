@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 
 # --------------------------- MODEL Structure --------------------------------
@@ -220,6 +221,11 @@ model = StyleGenerator(seed_size, 512, 512)
 model.load_state_dict(torch.load(model_path, map_location=device))
 model.eval()
 
+@app.route('/', methods=['GET'])
+def index():
+  # return list of routes ['gan_me']
+  return jsonify(routes=['gan_me'])
+
 @app.route('/gan_me', methods=['GET'])
 def gan_me():
     noise = torch.randn(1, 512, device=device, dtype=torch.float)
@@ -239,3 +245,8 @@ def gan_me():
 
       image = base64.b64encode(image_binary).decode("utf-8")
       return jsonify({'status': True, 'image': image})
+
+# create port and run app
+if __name__ == '__main__':
+    port = os.environ.get('PORT', 5000)
+    app.run(host='0.0.0.0', port=port, debug=False)
