@@ -225,7 +225,7 @@ model.eval()
 @app.route('/', methods=['GET'])
 def home():
     return '''<h1>Welcome to the AniGansFullbody server</h1>
-<p>Try sending a GET request to <a href="/gane_me">/gan_me</a>.</p>'''
+<p>Try sending a GET request to <a href="/gan_me">/gan_me</a>.</p>'''
 
 @app.route('/gan_me', methods=['GET'])
 def gan_me():
